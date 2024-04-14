@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   let imageIndex = 0; // Keeps track of the current image
   const images = [  // Array of image paths (replace with your image paths)
-    "image1.jpg",
-    "image2.jpg",
-    "image3.jpg",
+    "ice cube.jpg",
+    "Cropped-1612497611jpp036871911.jpg",
+    "photo_2024-04-12_03-20-41.jpg",
     // ... add more images
   ];
 
