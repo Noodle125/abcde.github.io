@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Chat with Slideshow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div id="slideshow-container">
+      <img id="current-image" src="image1.jpg" alt="Slide 1">
+      <div id="slideshow-controls">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+    <div class="username-box">
+      <input type="text" class="username-input" id="username-input" placeholder="Enter your username...">
+    </div>
+    <div id="announcement">
+      <p>This is an important announcement that will disappear into the username box.</p>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="message-box">
+      <input type="text" class="message-input" id="message-input" placeholder="Type your message...">
+      <button type="button" id="submit-button">Send</button>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
