@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => {
                 console.error("Error logging in:", error);
+                alert(error.message);
             });
     });
 
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => {
                 console.error("Error signing up:", error);
+                alert(error.message);
             });
     });
 
@@ -85,15 +87,22 @@ document.addEventListener("DOMContentLoaded", function() {
             const storageRef = storage.ref('avatars/' + currentUser.uid + '/' + avatarFile.name);
             storageRef.put(avatarFile).then(snapshot => {
                 snapshot.ref.getDownloadURL().then(downloadURL => {
-                    database.ref('users/' + currentUser.uid).set({
-                        username: username,
-                        avatar: downloadURL
+                    currentUser.updateProfile({
+                        displayName: username,
+                        photoURL: downloadURL
                     }).then(() => {
-                        profileContainer.style.display = "none";
-                        loadChatRooms();
+                        database.ref('users/' + currentUser.uid).set({
+                            username: username,
+                            avatar: downloadURL
+                        }).then(() => {
+                            profileContainer.style.display = "none";
+                            loadChatRooms();
+                        });
                     });
                 });
             });
+        } else {
+            alert("Please enter a username and select an avatar.");
         }
     });
 
@@ -110,7 +119,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 createdAt: firebase.database.ServerValue.TIMESTAMP
             }).then(() => {
                 loadChatRooms();
+                newRoomInput.value = "";  // Clear the input field
             });
+        } else {
+            alert("Please enter a room name.");
         }
     });
 
@@ -123,7 +135,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 userId: currentUser.uid,
                 timestamp: firebase.database.ServerValue.TIMESTAMP
             });
-            messageInput.value = "";
+            messageInput.value = ""; // Clear message input
+        } else {
+            alert("Please enter a message.");
         }
     });
 
