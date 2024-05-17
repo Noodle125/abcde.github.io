@@ -43,9 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
     auth.onAuthStateChanged(user => {
         if (user) {
             currentUser = user;
+            console.log("User logged in:", user);
             authContainer.style.display = "none";
             loadUserProfile();
         } else {
+            console.log("No user logged in");
             currentUser = null;
             authContainer.style.display = "block";
             profileContainer.style.display = "none";
@@ -142,15 +144,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function loadUserProfile() {
-        database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
-            const userProfile = snapshot.val();
-            if (userProfile) {
-                profileContainer.style.display = "none";
-                loadChatRooms();
-            } else {
-                profileContainer.style.display = "block";
-            }
-        });
+        if (currentUser) {
+            database.ref('users/' + currentUser.uid).once('value').then(snapshot => {
+                const userProfile = snapshot.val();
+                if (userProfile) {
+                    profileContainer.style.display = "none";
+                    loadChatRooms();
+                } else {
+                    profileContainer.style.display = "block";
+                }
+            }).catch(error => {
+                console.error("Error loading user profile:", error);
+            });
+        }
     }
 
     function loadChatRooms() {
