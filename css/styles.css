@@ -9,7 +9,6 @@ body {
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .chat-messages {
@@ -19,7 +18,6 @@ body {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
-    text-align: left;
 }
 
 .message-box {
